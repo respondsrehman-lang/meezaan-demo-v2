@@ -25,7 +25,7 @@
   --ink-soft:#5f6e62;
   --ink-faint:#8b968b;
   --gold:#b18a4f;
-  --gold-deep:#8f6d33;
+  --gold-deep:#8a6a30;
   --gold-soft:rgba(177,138,79,.16);
   --terra:#b5502a;
   --terra-soft:rgba(181,80,42,.12);
@@ -93,17 +93,6 @@ section{scroll-margin-top:108px;position:relative}
   .glass{background:rgba(255,255,255,.9)}
 }
 
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:.65rem;
-  font-size:.78rem;
-  font-weight:600;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--terra);
-}
-.kicker::before{content:"";width:26px;height:1px;background:var(--terra);opacity:.7}
 .h2{
   font-family:var(--disp);
   font-weight:600;
@@ -202,13 +191,12 @@ header.nav.scrolled .bar{background:rgba(255,255,255,.82)}
 .mobile-menu a.active{background:rgba(255,255,255,.7);color:var(--gold-deep)}
 header.nav.open .mobile-menu{display:block}
 
-.band{padding:90px 0;color:#f8f1e0;overflow:hidden}
+.band{padding:90px 0;color:#f8f1e0;overflow:hidden;background:var(--dark);z-index:0}
 .band::before{content:"";position:absolute;inset:0;z-index:-2}
 .band-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
 .band-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,22,12,.45),rgba(30,22,12,.62))}
-.band .kicker{color:#e8c893}
-.band .kicker::before{background:#e8c893}
 .band .h2{color:#fffdf4}
+.band .h2 em{color:#e3bd82}
 .band .lede{color:rgba(255,251,240,.85)}
 
 .reserve-card{
@@ -218,8 +206,6 @@ header.nav.open .mobile-menu{display:block}
   max-width:760px;
   margin-inline:auto;
 }
-.reserve-card .kicker{color:var(--terra)}
-.reserve-card .kicker::before{background:var(--terra)}
 .reserve-card .h2{color:var(--ink);margin-bottom:.4rem}
 .reserve-card .lede{color:var(--ink-soft);margin:0 auto 1.8rem}
 .reserve-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-bottom:1.4rem}
@@ -235,7 +221,7 @@ header.nav.open .mobile-menu{display:block}
   font-size:2rem;
   color:var(--gold-deep);
   line-height:1.1;
-  font-variant-numeric:tabular-nums;
+  font-variant-numeric:lining-nums tabular-nums;
 }
 .stat span{font-size:.82rem;color:var(--ink-soft);letter-spacing:.04em}
 
@@ -249,7 +235,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
 .foot-col li{margin-bottom:.5rem}
 .foot-col a{font-size:.92rem;color:rgba(236,228,208,.78);text-decoration:none}
 .foot-col a:hover{color:#fffdf4}
-.foot-base{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;font-size:.78rem;color:rgba(236,228,208,.55)}
+.foot-base{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;font-size:.78rem;color:rgba(236,228,208,.68)}
 .foot-base a{color:rgba(236,228,208,.75);text-decoration:none}
 .foot-base a:hover{color:#fffdf4}
 
@@ -258,6 +244,8 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 
 .ev-hero{padding:170px 0 100px}
+.ev-hero .band-img{filter:saturate(.72) brightness(.96)}
+.ev-hero .band-veil{background:linear-gradient(180deg,rgba(43,58,49,.6),rgba(43,58,49,.38) 46%,rgba(30,22,12,.64))}
 .ev-hero .lede{max-width:640px}
 .ev-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem}
 .ev-chip{
@@ -269,8 +257,8 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
   font-size:.85rem;
   font-weight:500;
   color:#fff8e8;
-  background:rgba(255,251,240,.12);
-  border:1px solid rgba(255,251,240,.28);
+  background:rgba(35,48,41,.42);
+  border:1px solid rgba(255,251,240,.2);
   -webkit-backdrop-filter:blur(8px);
   backdrop-filter:blur(8px);
 }
@@ -351,7 +339,6 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="band-veil"></div>
     <div class="container">
       <div class="reveal in">
-        <span class="kicker">Celebrations</span>
         <h1 class="h2">Your occasion, <em>our setting</em></h1>
         <p class="lede">From bespoke birthday themes to boardroom dinners and intimate nikkah evenings, Meezaan sets the room — and the mood. You bring the occasion; we'll bring the golden light, the courtyard and the kitchens.</p>
         <div class="ev-chips">
@@ -385,7 +372,6 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="container">
       <div class="occ-head">
         <div class="reveal">
-          <span class="kicker">Four Ways to Celebrate</span>
           <h2 class="h2">Tell us the occasion, <em>we'll dress the room</em></h2>
         </div>
         <a class="btn btn-ghost reveal d1" href="visit.html">Plan your visit
@@ -396,7 +382,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
         <article class="ev-card glass reveal">
           <span class="ev-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 5.4L20 8l-4 3.9.9 5.6-4.9-2.7-4.9 2.7.9-5.6L4 8l5.6-.6z"/></svg></span>
           <h3>Birthday Evenings</h3>
-          <p>From cartoon wonderlands to elegant gold-and-ivory setups, our team designs and dresses the room before you arrive — so the guest of honour walks into a surprise, not a table.</p>
+          <p>From cartoon wonderlands to elegant gold-and-ivory setups, our team designs and dresses the room before you arrive, so the guest of honour walks into a surprise, not a table.</p>
           <ul class="ev-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>500+ custom themes, décor and balloon styling</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Cake table, name display and photo corner</li>
@@ -409,7 +395,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
         <article class="ev-card glass reveal d1">
           <span class="ev-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
           <h3>Corporate Events</h3>
-          <p>Business lunches, product launches and executive dinners with the polish of fine dining and the privacy your meeting needs — served with pace, not interruptions.</p>
+          <p>Business lunches, product launches and executive dinners with the polish of fine dining and the privacy your meeting needs, served with pace, not interruptions.</p>
           <ul class="ev-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Private sections and quiet corners on request</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Business lunch menus with swift, silent service</li>
@@ -435,7 +421,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
         <article class="ev-card glass reveal d3">
           <span class="ev-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
           <h3>Iftar Buffet</h3>
-          <p>Ramadan evenings with a wide spread of iftar favourites — from dates and sharbat to a full dinner course — served with care as the courtyard glows till late.</p>
+          <p>Ramadan evenings with a wide spread of iftar favourites, from dates and sharbat to a full dinner course — served with care as the courtyard glows till late.</p>
           <ul class="ev-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Wide iftar spread followed by a full dinner</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Family tables and group bookings</li>
@@ -455,7 +441,6 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="band-veil"></div>
     <div class="container">
       <div class="reserve-card glass reveal">
-        <span class="kicker">Planning Made Easy</span>
         <h2 class="h2">One message, <em>and the room is yours</em></h2>
         <p class="lede">Tell us the date, the headcount and the vibe — our events team replies with themes, seating and menus the same day.</p>
         <div class="reserve-actions">
@@ -468,7 +453,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
             0300-1234567
           </a>
         </div>
-        <p class="reserve-note">Free valet parking · event dates fill fast — especially weekends and Ramadan evenings</p>
+        <p class="reserve-note">Free valet parking · event dates fill fast, especially weekends and Ramadan evenings</p>
       </div>
     </div>
   </section>
@@ -480,7 +465,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="foot-grid">
       <div class="foot-col">
         <div class="foot-mark">Meezaan<i>.</i></div>
-        <p>Located in the heart of Karachi on Main Boulevard, DHA Phase V, Meezaan brings together the richness of multi-cuisine flavours and the warmth of Pakistani hospitality. We don't just serve food — we create moods, memories and moments that last.</p>
+        <p>Located in the heart of Karachi on Main Boulevard, DHA Phase V, Meezaan brings together the richness of multi-cuisine flavors and the warmth of Pakistani hospitality. We don't just serve food — we create moods, memories and moments that last.</p>
       </div>
       <div class="foot-col">
         <h4>Quick Links</h4>

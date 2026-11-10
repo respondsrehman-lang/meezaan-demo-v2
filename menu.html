@@ -25,7 +25,7 @@
   --ink-soft:#5f6e62;
   --ink-faint:#8b968b;
   --gold:#b18a4f;
-  --gold-deep:#8f6d33;
+  --gold-deep:#8a6a30;
   --gold-soft:rgba(177,138,79,.16);
   --terra:#b5502a;
   --terra-soft:rgba(181,80,42,.12);
@@ -93,17 +93,6 @@ section{scroll-margin-top:108px;position:relative}
   .glass{background:rgba(255,255,255,.9)}
 }
 
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:.65rem;
-  font-size:.78rem;
-  font-weight:600;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--terra);
-}
-.kicker::before{content:"";width:26px;height:1px;background:var(--terra);opacity:.7}
 .h2{
   font-family:var(--disp);
   font-weight:600;
@@ -202,13 +191,12 @@ header.nav.scrolled .bar{background:rgba(255,255,255,.82)}
 .mobile-menu a.active{background:rgba(255,255,255,.7);color:var(--gold-deep)}
 header.nav.open .mobile-menu{display:block}
 
-.band{padding:90px 0;color:#f8f1e0;overflow:hidden}
+.band{padding:90px 0;color:#f8f1e0;overflow:hidden;background:var(--dark);z-index:0}
 .band::before{content:"";position:absolute;inset:0;z-index:-2}
 .band-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
 .band-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,22,12,.45),rgba(30,22,12,.62))}
-.band .kicker{color:#e8c893}
-.band .kicker::before{background:#e8c893}
 .band .h2{color:#fffdf4}
+.band .h2 em{color:#e3bd82}
 .band .lede{color:rgba(255,251,240,.85)}
 
 .reserve-card{
@@ -218,8 +206,6 @@ header.nav.open .mobile-menu{display:block}
   max-width:760px;
   margin-inline:auto;
 }
-.reserve-card .kicker{color:var(--terra)}
-.reserve-card .kicker::before{background:var(--terra)}
 .reserve-card .h2{color:var(--ink);margin-bottom:.4rem}
 .reserve-card .lede{color:var(--ink-soft);margin:0 auto 1.8rem}
 .reserve-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-bottom:1.4rem}
@@ -235,7 +221,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
 .foot-col li{margin-bottom:.5rem}
 .foot-col a{font-size:.92rem;color:rgba(236,228,208,.78);text-decoration:none}
 .foot-col a:hover{color:#fffdf4}
-.foot-base{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;font-size:.78rem;color:rgba(236,228,208,.55)}
+.foot-base{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;font-size:.78rem;color:rgba(236,228,208,.68)}
 .foot-base a{color:rgba(236,228,208,.75);text-decoration:none}
 .foot-base a:hover{color:#fffdf4}
 
@@ -343,7 +329,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
 .dish-top{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
 .dish-top b{font-weight:600;font-size:.97rem;overflow-wrap:anywhere}
 .dish-leader{flex:1;min-width:14px;border-bottom:1px dotted rgba(177,138,79,.55);transform:translateY(-4px)}
-.dish-price{font-weight:600;color:var(--gold-deep);white-space:nowrap;font-size:.94rem;font-variant-numeric:tabular-nums}
+.dish-price{font-weight:600;color:var(--gold-deep);white-space:nowrap;font-size:.94rem;font-variant-numeric:lining-nums tabular-nums}
 .dish-price small{font-weight:500;color:var(--ink-soft);font-size:.72rem;margin-right:.35rem}
 .dish-price small + small{margin-left:.35rem}
 .dish-main p{font-size:.83rem;color:var(--ink-soft);margin-top:.12rem;text-wrap:pretty}
@@ -408,7 +394,6 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="container">
       <div class="menu-head">
         <div class="reveal">
-          <span class="kicker">The Menu</span>
           <h1 class="h2">Four kitchens, <em>one courtyard</em></h1>
           <p class="lede">Real dishes, real prices. Tap a category to browse what the chefs are firing tonight.</p>
         </div>
@@ -440,7 +425,6 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="band-veil"></div>
     <div class="container">
       <div class="reserve-card glass reveal">
-        <span class="kicker">Reservations</span>
         <h2 class="h2">Secure your <em>serene evening</em></h2>
         <p class="lede">Reserve on WhatsApp in under a minute, or simply call us.</p>
         <div class="reserve-actions">
@@ -465,7 +449,7 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     <div class="foot-grid">
       <div class="foot-col">
         <div class="foot-mark">Meezaan<i>.</i></div>
-        <p>Located in the heart of Karachi on Main Boulevard, DHA Phase V, Meezaan brings together the richness of multi-cuisine flavours and the warmth of Pakistani hospitality. We don't just serve food — we create moods, memories and moments that last.</p>
+        <p>Located in the heart of Karachi on Main Boulevard, DHA Phase V, Meezaan brings together the richness of multi-cuisine flavors and the warmth of Pakistani hospitality. We don't just serve food — we create moods, memories and moments that last.</p>
       </div>
       <div class="foot-col">
         <h4>Quick Links</h4>
