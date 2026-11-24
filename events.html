@@ -172,24 +172,65 @@ header.nav.scrolled .bar{background:rgba(255,255,255,.82)}
   box-shadow:inset 0 0 0 1px rgba(177,138,79,.4);
 }
 .nav-cta{display:flex;align-items:center;gap:.5rem}
-.nav-burger{display:none;width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.6);align-items:center;justify-content:center}
-.nav-burger svg{width:20px;height:20px;stroke:var(--ink)}
+.nav-burger{display:none;width:42px;height:42px;border:0;border-radius:999px;background:rgba(255,255,255,.6);align-items:center;justify-content:center;cursor:pointer;transition:background .25s ease,transform .3s cubic-bezier(.22,.9,.25,1)}
+.nav-burger:hover{background:rgba(255,255,255,.85)}
+.nav-burger:active{transform:scale(.93)}
+.burger-lines{position:relative;display:block;width:20px;height:14px}
+.burger-lines i{position:absolute;left:0;width:20px;height:2px;border-radius:2px;background:var(--ink);transform-origin:center;transition:transform .38s cubic-bezier(.22,.9,.25,1),opacity .2s ease,width .3s ease}
+.burger-lines i:nth-child(1){top:0}
+.burger-lines i:nth-child(2){top:6px;width:14px}
+.burger-lines i:nth-child(3){top:12px}
+.nav-burger:hover .burger-lines i:nth-child(2){width:20px}
+body.menu-open .burger-lines i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+body.menu-open .burger-lines i:nth-child(2){opacity:0;transform:scaleX(.2)}
+body.menu-open .burger-lines i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-scrim{position:fixed;inset:0;z-index:55;background:rgba(30,22,12,.28);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease,visibility .35s ease}
+body.menu-open .nav-scrim{opacity:1;visibility:visible;pointer-events:auto}
 .mobile-menu{
-  display:none;
   width:min(1180px,94%);
-  margin:10px auto 0;
-  padding:.6rem;
+  margin:0 auto;
+  padding:0 .6rem;
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-10px) scale(.985);
+  transform-origin:top center;
+  pointer-events:none;
   border-radius:20px;
-  background:rgba(255,255,255,.86);
+  border:1px solid transparent;
+  background:rgba(255,255,255,.88);
   -webkit-backdrop-filter:blur(18px);
   backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.9);
+  transition:max-height .42s cubic-bezier(.22,.9,.25,1),opacity .3s ease,transform .42s cubic-bezier(.22,.9,.25,1),margin .42s cubic-bezier(.22,.9,.25,1),padding .42s ease,border-color .3s ease,box-shadow .3s ease;
+}
+body.menu-open .mobile-menu{
+  max-height:360px;
+  margin:10px auto 0;
+  padding:.6rem;
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
+  border-color:rgba(255,255,255,.9);
   box-shadow:var(--shadow);
 }
-.mobile-menu a{display:block;padding:.7rem 1rem;border-radius:12px;text-decoration:none;font-weight:500;color:var(--ink)}
-.mobile-menu a:hover{background:rgba(255,255,255,.7)}
-.mobile-menu a.active{background:rgba(255,255,255,.7);color:var(--gold-deep)}
-header.nav.open .mobile-menu{display:block}
+.mobile-menu a{
+  position:relative;
+  display:block;
+  padding:.78rem 1rem;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:500;
+  color:var(--ink);
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .32s ease,transform .42s cubic-bezier(.22,.9,.25,1),background .2s ease,color .2s ease,padding-left .3s ease;
+}
+body.menu-open .mobile-menu a{opacity:1;transform:none;transition-delay:calc(var(--i,0)*55ms + 70ms),calc(var(--i,0)*55ms + 70ms),0s,0s,0s}
+.mobile-menu a:hover,.mobile-menu a:focus-visible{background:rgba(255,255,255,.75);padding-left:1.2rem}
+.mobile-menu a.active{background:rgba(255,255,255,.72);color:var(--gold-deep)}
+@media (prefers-reduced-motion:reduce){
+  .nav-burger,.burger-lines i,.nav-scrim,.mobile-menu,.mobile-menu a{transition:none !important}
+}
 
 .band{padding:90px 0;color:#f8f1e0;overflow:hidden;background:var(--dark);z-index:0}
 .band::before{content:"";position:absolute;inset:0;z-index:-2}
@@ -319,18 +360,19 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         <span class="txt">Reserve a Table</span>
       </a>
-      <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <button type="button" class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="burger-lines" aria-hidden="true"><i></i><i></i><i></i></span>
       </button>
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
-    <a href="events.html" class="active" aria-current="page">Events</a>
-    <a href="visit.html">Contact</a>
+    <a href="index.html" style="--i:0">Home</a>
+    <a href="menu.html" style="--i:1">Menu</a>
+    <a href="events.html" class="active" aria-current="page" style="--i:2">Events</a>
+    <a href="visit.html" style="--i:3">Contact</a>
   </div>
 </header>
+<div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
 
 <main>
 
@@ -499,25 +541,42 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
   "use strict";
   var nav = document.getElementById("nav");
   var burger = document.getElementById("burger");
-  var closeMenu = function(){
-    nav.classList.remove("open");
-    burger.setAttribute("aria-expanded","false");
-    document.body.style.removeProperty("overflow");
-  };
-  var toggleMenu = function(){
-    var open = nav.classList.toggle("open");
+  var scrim = document.getElementById("navScrim");
+  var menu = document.getElementById("mobileMenu");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var setMenu = function(open){
+    document.body.classList.toggle("menu-open", open);
+    nav.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     document.body.style.overflow = open ? "hidden" : "";
   };
+  var closeMenu = function(){ setMenu(false); };
+  var toggleMenu = function(){
+    var open = !document.body.classList.contains("menu-open");
+    setMenu(open);
+    if (open && menu){
+      var first = menu.querySelector("a");
+      if (first) window.setTimeout(function(){ first.focus(); }, reduce ? 0 : 140);
+    }
+  };
   burger.addEventListener("click", toggleMenu);
+  if (scrim) scrim.addEventListener("click", closeMenu);
   document.addEventListener("keydown", function(e){
-    if (e.key === "Escape" && nav.classList.contains("open")){ closeMenu(); burger.focus(); }
+    if (!document.body.classList.contains("menu-open")) return;
+    if (e.key === "Escape"){ closeMenu(); burger.focus(); }
+    if (e.key === "Tab" && menu){
+      var links = [burger].concat(Array.prototype.slice.call(menu.querySelectorAll("a")));
+      var i = links.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0){ e.preventDefault(); links[links.length-1].focus(); }
+      else if (!e.shiftKey && i === links.length-1){ e.preventDefault(); links[0].focus(); }
+    }
   });
   document.addEventListener("click", function(e){
-    if (nav.classList.contains("open") && !nav.contains(e.target)) closeMenu();
+    if (document.body.classList.contains("menu-open") && !nav.contains(e.target) && e.target !== scrim) closeMenu();
   });
   document.querySelectorAll("#mobileMenu a").forEach(function(a){
-    a.addEventListener("click", function(){ closeMenu(); });
+    a.addEventListener("click", closeMenu);
   });
   var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 24); };
   window.addEventListener("scroll", onScroll, {passive:true});
