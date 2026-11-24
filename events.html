@@ -172,47 +172,34 @@ header.nav.scrolled .bar{background:rgba(255,255,255,.82)}
   box-shadow:inset 0 0 0 1px rgba(177,138,79,.4);
 }
 .nav-cta{display:flex;align-items:center;gap:.5rem}
-.nav-burger{display:none;width:42px;height:42px;border:0;border-radius:999px;background:rgba(255,255,255,.6);align-items:center;justify-content:center;cursor:pointer;transition:background .25s ease,transform .3s cubic-bezier(.22,.9,.25,1)}
-.nav-burger:hover{background:rgba(255,255,255,.85)}
-.nav-burger:active{transform:scale(.93)}
+.nav-burger{display:none;position:relative;width:44px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.6);align-items:center;justify-content:center;cursor:pointer;touch-action:none;transition:background .18s ease,transform .18s cubic-bezier(.22,.9,.25,1)}
+.nav-burger::before{content:"";position:absolute;inset:-10px;border-radius:inherit}
+.nav-burger:hover{background:rgba(255,255,255,.78)}
+.nav-burger.pressed,.nav-burger:active{background:rgba(255,255,255,.92);transform:scale(.95);transition-duration:80ms}
 .burger-lines{position:relative;display:block;width:20px;height:14px}
-.burger-lines i{position:absolute;left:0;width:20px;height:2px;border-radius:2px;background:var(--ink);transform-origin:center;transition:transform .38s cubic-bezier(.22,.9,.25,1),opacity .2s ease,width .3s ease}
+.burger-lines i{position:absolute;left:0;width:20px;height:2px;border-radius:2px;background:var(--ink);transform-origin:center;will-change:transform,opacity}
 .burger-lines i:nth-child(1){top:0}
 .burger-lines i:nth-child(2){top:6px;width:14px}
 .burger-lines i:nth-child(3){top:12px}
-.nav-burger:hover .burger-lines i:nth-child(2){width:20px}
-body.menu-open .burger-lines i:nth-child(1){transform:translateY(6px) rotate(45deg)}
-body.menu-open .burger-lines i:nth-child(2){opacity:0;transform:scaleX(.2)}
-body.menu-open .burger-lines i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-.nav-scrim{position:fixed;inset:0;z-index:55;background:rgba(30,22,12,.28);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease,visibility .35s ease}
-body.menu-open .nav-scrim{opacity:1;visibility:visible;pointer-events:auto}
+.nav-scrim{position:fixed;inset:0;z-index:55;background:rgba(30,22,12,.28);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;visibility:hidden;pointer-events:none;touch-action:none;will-change:opacity}
 .mobile-menu{
+  position:absolute;top:100%;left:50%;
   width:min(1180px,94%);
-  margin:0 auto;
-  padding:0 .6rem;
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transform:translateY(-10px) scale(.985);
-  transform-origin:top center;
-  pointer-events:none;
-  border-radius:20px;
-  border:1px solid transparent;
-  background:rgba(255,255,255,.88);
-  -webkit-backdrop-filter:blur(18px);
-  backdrop-filter:blur(18px);
-  transition:max-height .42s cubic-bezier(.22,.9,.25,1),opacity .3s ease,transform .42s cubic-bezier(.22,.9,.25,1),margin .42s cubic-bezier(.22,.9,.25,1),padding .42s ease,border-color .3s ease,box-shadow .3s ease;
-}
-body.menu-open .mobile-menu{
-  max-height:360px;
-  margin:10px auto 0;
+  margin:0;
   padding:.6rem;
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
-  border-color:rgba(255,255,255,.9);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.9);
+  background:rgba(255,255,255,.88);
   box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(0px);
+  backdrop-filter:blur(0px);
+  opacity:0;visibility:hidden;pointer-events:none;touch-action:none;
+  transform:translate(-50%,-14px) scale(.985);
+  transform-origin:top center;
+  will-change:transform,opacity;
+  transition:backdrop-filter .35s ease,-webkit-backdrop-filter .35s ease;
 }
+body.menu-open .mobile-menu{-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);pointer-events:auto}
 .mobile-menu a{
   position:relative;
   display:block;
@@ -229,7 +216,22 @@ body.menu-open .mobile-menu a{opacity:1;transform:none;transition-delay:calc(var
 .mobile-menu a:hover,.mobile-menu a:focus-visible{background:rgba(255,255,255,.75);padding-left:1.2rem}
 .mobile-menu a.active{background:rgba(255,255,255,.72);color:var(--gold-deep)}
 @media (prefers-reduced-motion:reduce){
-  .nav-burger,.burger-lines i,.nav-scrim,.mobile-menu,.mobile-menu a{transition:none !important}
+  .nav-burger,.burger-lines i{transition:none}
+  .mobile-menu{transform:none !important;transition:opacity .18s ease,backdrop-filter .18s ease,-webkit-backdrop-filter .18s ease}
+  .nav-scrim{transition:opacity .18s ease}
+  .mobile-menu a{transform:none;transition:opacity .18s ease;transition-delay:0s}
+  body.menu-open .burger-lines i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  body.menu-open .burger-lines i:nth-child(2){opacity:0;transform:scaleX(.2)}
+  body.menu-open .burger-lines i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+}
+@media (prefers-reduced-transparency:reduce){
+  .mobile-menu{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .nav-scrim{background:rgba(30,22,12,.45);backdrop-filter:none;-webkit-backdrop-filter:none}
+  header.nav .bar{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media (prefers-contrast:more){
+  .mobile-menu{background:#fff;border-color:#8a6a3a}
+  .mobile-menu a{color:#1a1a1a}
 }
 
 .band{padding:90px 0;color:#f8f1e0;overflow:hidden;background:var(--dark);z-index:0}
@@ -543,29 +545,166 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
   var burger = document.getElementById("burger");
   var scrim = document.getElementById("navScrim");
   var menu = document.getElementById("mobileMenu");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var setMenu = function(open){
+  var lines = burger.querySelectorAll(".burger-lines i");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var open = false, y = 0, target = 0, velocity = 0, zeta = 1;
+  var closedY = -260, menuHeight = 240, raf = 0, lastT = 0;
+  var dragEl = null, pid = null, startX = 0, startY = 0, baseTop = 0, grabOffset = 0;
+  var hist = [], isDrag = false, pressOk = false, suppressClick = false;
+
+  function measure(){
+    menuHeight = menu.offsetHeight || 240;
+    closedY = -(menuHeight + 14);
+    if (!isDrag && !raf) y = target = open ? 0 : closedY;
+  }
+  function project(v, d){ d = d || 0.998; return (v / 1000) * d / (1 - d); }
+  function rubberband(x, dim){
+    var c = 0.55;
+    return (x * dim * c) / (dim + c * Math.abs(x));
+  }
+  function render(){
+    var span = 0 - closedY;
+    var p = span ? (y - closedY) / span : 0;
+    var q = Math.max(0, Math.min(1, p));
+    if (!reduceMotion){
+      menu.style.transform = "translate(-50%," + y.toFixed(2) + "px) scale(" + (0.985 + 0.015 * q).toFixed(4) + ")";
+      if (lines.length === 3){
+        lines[0].style.transform = "translateY(" + (6 * q).toFixed(2) + "px) rotate(" + (45 * q).toFixed(2) + "deg)";
+        lines[1].style.opacity = (1 - q).toFixed(3);
+        lines[1].style.transform = "scaleX(" + (1 - 0.8 * q).toFixed(3) + ")";
+        lines[2].style.transform = "translateY(" + (-6 * q).toFixed(2) + "px) rotate(" + (-45 * q).toFixed(2) + "deg)";
+      }
+    }
+    menu.style.opacity = q.toFixed(3);
+    scrim.style.opacity = (q * 0.28).toFixed(3);
+  }
+  function settle(){
+    if (!open && !isDrag){
+      menu.style.visibility = "hidden";
+      scrim.style.visibility = "hidden";
+      document.body.style.removeProperty("overflow");
+    }
+  }
+  function tick(now){
+    var dt = Math.min((now - lastT) / 1000, 1 / 30);
+    lastT = now;
+    var w = 4.74 / 0.35;
+    var k = w * w, c = 2 * zeta * w;
+    velocity += (-k * (y - target) - c * velocity) * dt;
+    y += velocity * dt;
+    if (Math.abs(y - target) < 0.4 && Math.abs(velocity) < 4){
+      y = target; velocity = 0; raf = 0; render(); settle(); return;
+    }
+    render();
+    raf = requestAnimationFrame(tick);
+  }
+  function springTo(t, v){
+    target = t;
+    velocity = v || 0;
+    zeta = Math.abs(velocity) > 250 ? 0.82 : 1;
+    if (reduceMotion){ y = t; velocity = 0; raf = 0; render(); settle(); return; }
+    if (!raf){ lastT = performance.now(); raf = requestAnimationFrame(tick); }
+  }
+  function syncState(){
     document.body.classList.toggle("menu-open", open);
     nav.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open ? "true" : "false");
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    document.body.style.overflow = open ? "hidden" : "";
-  };
-  var closeMenu = function(){ setMenu(false); };
-  var toggleMenu = function(){
-    var open = !document.body.classList.contains("menu-open");
-    setMenu(open);
-    if (open && menu){
-      var first = menu.querySelector("a");
-      if (first) window.setTimeout(function(){ first.focus(); }, reduce ? 0 : 140);
+    if (open) document.body.style.overflow = "hidden";
+  }
+  function setOpen(next, v){
+    open = next;
+    syncState();
+    menu.style.visibility = "visible";
+    scrim.style.visibility = "visible";
+    springTo(next ? 0 : closedY, v);
+    var first = menu.querySelector("a");
+    if (next && first) first.focus();
+    if (!next) burger.focus();
+  }
+  function releaseVelocity(){
+    if (hist.length < 2) return 0;
+    var a = hist[0], b = hist[hist.length - 1];
+    var dt = (b.t - a.t) / 1000;
+    return dt > 0.001 ? (b.y - a.y) / dt : 0;
+  }
+  function beginGesture(e, el){
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    if (raf){ cancelAnimationFrame(raf); raf = 0; }
+    dragEl = el; pid = e.pointerId;
+    startX = e.clientX; startY = e.clientY;
+    isDrag = false; pressOk = (el === burger);
+    suppressClick = false;
+    var rect = menu.getBoundingClientRect();
+    baseTop = rect.top - y;
+    grabOffset = e.clientY - (baseTop + y);
+    hist = [{ y: y, t: performance.now() }];
+    el.setPointerCapture(e.pointerId);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onCancel);
+    if (el === burger) burger.classList.add("pressed");
+  }
+  function onMove(e){
+    if (e.pointerId !== pid) return;
+    var dx = e.clientX - startX, dy = e.clientY - startY;
+    if (!isDrag){
+      if (Math.abs(dy) < 10 && Math.abs(dx) < 10){
+        if (dragEl === burger && (Math.abs(dy) > 4 || Math.abs(dx) > 4)) pressOk = false;
+        return;
+      }
+      isDrag = true; pressOk = false;
+      if (dragEl === burger){
+        open = true; syncState();
+        menu.style.visibility = "visible"; scrim.style.visibility = "visible";
+      }
     }
-  };
-  burger.addEventListener("click", toggleMenu);
-  if (scrim) scrim.addEventListener("click", closeMenu);
+    var ny = e.clientY - baseTop - grabOffset;
+    if (ny > 0) ny = rubberband(ny, menuHeight);
+    else if (ny < closedY) ny = closedY + rubberband(ny - closedY, menuHeight);
+    y = ny;
+    var now = performance.now();
+    hist.push({ y: y, t: now });
+    while (hist.length > 2 && now - hist[0].t > 100) hist.shift();
+    render();
+  }
+  function onUp(e){ if (e.pointerId === pid) finishGesture(true); }
+  function onCancel(e){ if (e.pointerId === pid) finishGesture(false); }
+  function finishGesture(commit){
+    var el = dragEl;
+    el.removeEventListener("pointermove", onMove);
+    el.removeEventListener("pointerup", onUp);
+    el.removeEventListener("pointercancel", onCancel);
+    if (el === burger) burger.classList.remove("pressed");
+    try { el.releasePointerCapture(pid); } catch (err) {}
+    var wasDrag = isDrag;
+    isDrag = false;
+    dragEl = null; pid = null;
+    if (!wasDrag){
+      if (commit && pressOk && el === burger) setOpen(!open, 0);
+      return;
+    }
+    suppressClick = true;
+    if (!commit){ setOpen(false, 0); return; }
+    var v = releaseVelocity();
+    var projected = y + project(v, 0.998);
+    var next = Math.abs(projected) <= Math.abs(projected - closedY);
+    setOpen(next, v);
+  }
+  burger.addEventListener("pointerdown", function(e){ beginGesture(e, burger); });
+  [menu, scrim].forEach(function(el){
+    el.addEventListener("pointerdown", function(e){
+      if (e.target.closest("a, button")) return;
+      beginGesture(e, el);
+    });
+  });
+  document.addEventListener("pointerdown", function(){ suppressClick = false; }, true);
+  burger.addEventListener("click", function(e){ if (e.detail === 0 && !suppressClick) setOpen(!open, 0); });
+  scrim.addEventListener("click", function(){ if (!suppressClick) setOpen(false, 0); });
   document.addEventListener("keydown", function(e){
-    if (!document.body.classList.contains("menu-open")) return;
-    if (e.key === "Escape"){ closeMenu(); burger.focus(); }
-    if (e.key === "Tab" && menu){
+    if (!open) return;
+    if (e.key === "Escape"){ setOpen(false, 0); burger.focus(); }
+    if (e.key === "Tab"){
       var links = [burger].concat(Array.prototype.slice.call(menu.querySelectorAll("a")));
       var i = links.indexOf(document.activeElement);
       if (e.shiftKey && i <= 0){ e.preventDefault(); links[links.length-1].focus(); }
@@ -573,11 +712,16 @@ footer{background:var(--dark);color:#cfc8b4;padding:64px 0 30px}
     }
   });
   document.addEventListener("click", function(e){
-    if (document.body.classList.contains("menu-open") && !nav.contains(e.target) && e.target !== scrim) closeMenu();
+    if (open && !nav.contains(e.target) && e.target !== scrim) setOpen(false, 0);
   });
   document.querySelectorAll("#mobileMenu a").forEach(function(a){
-    a.addEventListener("click", closeMenu);
+    a.addEventListener("click", function(){ if (!suppressClick) setOpen(false, 0); });
   });
+  window.addEventListener("resize", function(){ measure(); if (!isDrag && !raf){ y = target; render(); } });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ measure(); if (!isDrag && !raf){ y = target; render(); } });
+  measure();
+  y = target = closedY;
+  render();
   var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 24); };
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
